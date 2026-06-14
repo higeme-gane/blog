@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>立入検査 改定比較表（令和７→８年度）</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: "Hiragino Sans", "Meiryo", "Yu Gothic", sans-serif;
+    font-size: 13px;
+    line-height: 1.6;
+    background: #f4f3ef;
+    color: #1a1a18;
+    padding: 2rem 1rem;
+  }
+
+  .page-header {
+    max-width: 1280px;
+    margin: 0 auto 2rem;
+  }
+
+  .page-header h1 {
+    font-size: 20px;
+    font-weight: 500;
+    color: #1a1a18;
+    margin-bottom: 0.4rem;
+  }
+
+  .page-header p {
+    font-size: 12px;
+    color: #5f5e5a;
+  }
+
+  .tabs {
+    max-width: 1280px;
+    margin: 0 auto 1rem;
+    display: flex;
+    gap: 6px;
+  }
+
+  .tab-btn {
+    padding: 8px 20px;
+    border-radius: 8px 8px 0 0;
+    border: 0.5px solid #d3d1c7;
+    border-bottom: none;
+    background: #e8e7e3;
+    color: #5f5e5a;
+    font-size: 13px;
+    font-family: inherit;
+    cursor: pointer;
+    font-weight: 400;
+    transition: background 0.15s;
+  }
+
+  .tab-btn.active {
+    background: #fff;
+    color: #1a1a18;
+    font-weight: 500;
+  }
+
+  .tab-btn:hover:not(.active) {
+    background: #dddcd7;
+  }
+
+  .table-wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 0 12px 12px 12px;
+    border: 0.5px solid #d3d1c7;
+    overflow: hidden;
+  }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  .summary-bar {
+    display: flex;
+    gap: 10px;
+    padding: 14px 20px;
+    background: #f9f8f5;
+    border-bottom: 0.5px solid #d3d1c7;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  .badge-new  { background: #E1F5EE; color: #0F6E56; }
+  .badge-mod  { background: #E6F1FB; color: #185FA5; }
+  .badge-del  { background: #FCEBEB; color: #A32D2D; }
+  .badge-ref  { background: #FAEEDA; color: #854F0B; }
+  .badge-ren  { background: #EEEDFE; color: #534AB7; }
+
+  .badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .badge-new  .badge-dot { background: #0F6E56; }
+  .badge-mod  .badge-dot { background: #185FA5; }
+  .badge-del  .badge-dot { background: #A32D2D; }
+  .badge-ref  .badge-dot { background: #854F0B; }
+  .badge-ren  .badge-dot { background: #534AB7; }
+
+  .summary-total {
+    margin-left: auto;
+    font-size: 12px;
+    color: #5f5e5a;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+
+  colgroup col:nth-child(1) { width: 4%; }
+  colgroup col:nth-child(2) { width: 14%; }
+  colgroup col:nth-child(3) { width: 22%; }
+  colgroup col:nth-child(4) { width: 24%; }
+  colgroup col:nth-child(5) { width: 22%; }
+  colgroup col:nth-child(6) { width: 14%; }
+
+  thead th {
+    background: #2C2C2A;
+    color: #f1efe8;
+    font-weight: 500;
+    font-size: 12px;
+    padding: 10px 12px;
+    text-align: left;
+    letter-spacing: 0.02em;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+
+  thead th:first-child { text-align: center; border-radius: 0; }
+
+  tbody tr {
+    border-bottom: 0.5px solid #e8e7e2;
+    transition: background 0.1s;
+  }
+
+  tbody tr:hover { background: #fafaf8; }
+
+  tbody tr:last-child { border-bottom: none; }
+
+  td {
+    padding: 12px 12px;
+    vertical-align: top;
+    font-size: 12.5px;
+    line-height: 1.65;
+    color: #2c2c2a;
+    word-break: break-all;
+  }
+
+  .td-no {
+    text-align: center;
+    font-weight: 500;
+    color: #888780;
+    font-size: 12px;
+    vertical-align: middle;
+    word-break: keep-all;
+  }
+
+  .td-loc {
+    font-weight: 500;
+    color: #1a1a18;
+    font-size: 12px;
+  }
+
+  .td-loc .sub {
+    display: block;
+    font-weight: 400;
+    color: #5f5e5a;
+    font-size: 11px;
+    margin-top: 3px;
+  }
+
+  .td-before {
+    background: #fdf8f6;
+    color: #4a2a1c;
+  }
+
+  .td-after {
+    background: #f2f8f5;
+    color: #0c2e22;
+  }
+
+  .td-point {
+    font-size: 12px;
+    color: #444441;
+  }
+
+  .change-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+  }
+
+  .tag-new   { background: #E1F5EE; color: #085041; }
+  .tag-mod   { background: #E6F1FB; color: #0C447C; }
+  .tag-del   { background: #FCEBEB; color: #791F1F; }
+  .tag-ref   { background: #FAEEDA; color: #633806; }
+  .tag-ren   { background: #EEEDFE; color: #3C3489; }
+  .tag-relax { background: #F4C0D1; color: #4B1528; }
+
+  .arrow-col {
+    text-align: center;
+    vertical-align: middle;
+    color: #b4b2a9;
+    font-size: 16px;
+    padding: 0 4px;
+    word-break: keep-all;
+  }
+
+  .none-text {
+    color: #b4b2a9;
+    font-style: italic;
+  }
+
+  .filter-bar {
+    display: flex;
+    gap: 6px;
+    padding: 10px 20px;
+    background: #fff;
+    border-bottom: 0.5px solid #e8e7e2;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .filter-label {
+    font-size: 11px;
+    color: #5f5e5a;
+    margin-right: 2px;
+  }
+
+  .filter-btn {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 0.5px solid #d3d1c7;
+    background: #fff;
+    cursor: pointer;
+    color: #444441;
+    font-family: inherit;
+    transition: all 0.1s;
+  }
+
+  .filter-btn.on {
+    background: #2C2C2A;
+    color: #f1efe8;
+    border-color: #2C2C2A;
+  }
+
+  .filter-btn:hover:not(.on) { background: #f1efe8; }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .tabs, .filter-bar, .summary-bar { display: none; }
+    .tab-panel { display: block !important; }
+    .table-wrap { border: none; border-radius: 0; }
+    thead th { background: #444 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .td-before { background: #fff8f5 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .td-after  { background: #f0f8f3 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>医療法第25条第１項 立入検査 改定比較表（令和７→８年度）</h1>
+  <p>厚生労働省医政局長通知 / 立入検査要綱の一部改正 比較</p>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab(0)">① 実施通知の変更点（15項目）</button>
+  <button class="tab-btn"        onclick="switchTab(1)">② 立入検査要綱の変更点（13項目）</button>
+</div>
+
+<div class="table-wrap">
+
+<!-- ===== TAB 1 : 実施通知 ===== -->
+<div class="tab-panel active" id="panel-0">
+  <div class="summary-bar">
+    <span class="badge badge-new"><span class="badge-dot"></span>新規追加</span>
+    <span class="badge badge-mod"><span class="badge-dot"></span>内容変更・拡充</span>
+    <span class="badge badge-ref"><span class="badge-dot"></span>参考通知更新</span>
+    <span class="badge badge-ren"><span class="badge-dot"></span>名称変更</span>
+    <span class="badge badge-del"><span class="badge-dot"></span>緩和・削除</span>
+    <span class="summary-total">全15項目</span>
+  </div>
+  <div class="filter-bar">
+    <span class="filter-label">絞り込み：</span>
+    <button class="filter-btn on" onclick="filterTable(0,'all',this)">すべて</button>
+    <button class="filter-btn" onclick="filterTable(0,'new',this)">新規追加</button>
+    <button class="filter-btn" onclick="filterTable(0,'mod',this)">内容変更</button>
+    <button class="filter-btn" onclick="filterTable(0,'ref',this)">参考通知更新</button>
+    <button class="filter-btn" onclick="filterTable(0,'ren',this)">名称変更</button>
+    <button class="filter-btn" onclick="filterTable(0,'relax',this)">緩和</button>
+  </div>
+  <table>
+    <colgroup><col><col><col><col><col><col></colgroup>
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>該当箇所・項目</th>
+        <th>改定前（令和７年度）</th>
+        <th></th>
+        <th>改定後（令和８年度）</th>
+        <th>変更のポイント</th>
+      </tr>
+    </thead>
+    <tbody>
+
+<tr data-tag="ref">
+<td class="td-no">1</td>
+<td class="td-loc">冒頭文<span class="sub">通知番号・日付</span></td>
+<td class="td-before">医政発0627第９号<br>令和７年６月27日</td>
+<td class="arrow-col">→</td>
+<td class="td-after"><span class="change-tag tag-ref">参考通知更新</span><br>医政発0612第10号<br>令和８年６月12日</td>
+<td class="td-point">通知番号・発出日付が更新された。</td>
+</tr>
+
+<tr data-tag="mod">
+<td class="td-no">2</td>
+<td class="td-loc">冒頭文<span class="sub">立入検査対象の定義</span></td>
+<td class="td-before">「医療機関の立入検査を実施するに当たっては…」<br>（対象：医療機関）</td>
+<td class="arrow-col">→</td>
+<td class="td-after"><span class="change-tag tag-mod">内容変更</span><br>「医療機関、助産所又はオンライン診療受診施設（以下「医療機関等」という。）の立入検査を実施するに当たっては…」<br>（対象：医療機関等）</td>
+<td class="td-point">オンライン診療受診施設が立入検査対象に追加され、「医療機関」が「医療機関等」へ拡大された。</td>
+</tr>
+
+<tr data-tag="mod">
+<td class="td-no">3</td>
+<td class="td-loc">Ⅰ-ⅰ-ア<span class="sub">一般的な安全管理体制（冒頭追記）</span></td>
+<td class="td-before"><span class="none-text">（該当する追記なし）</span></td>
+<td class="arrow-col">→</td>
+<td class="td-after"><span class="change-tag tag-mod">内容追記</span><br>「病院等における医療の安全を確保するための措置について」（令和８年３月31日付け医政地発0331第72号）に基づく立入検査要綱等の改訂は<strong>令和９年度を予定</strong>していることから、今年度については必要に応じて同通知の内容を立入検査の際に医療機関に周知いただきたい。</td>
+<td class="td-point">新省令・通知（令和８年３月31日付）の存在と、要綱改訂が令和９年度予定であることを明記。今年度は「周知」対応。</td>
+</tr>
+
+<tr data-tag="new">
+<td class="td-no">4</td>
+<td class="td-loc">Ⅰ-ⅰ-ア⑦<span class="sub">毒薬・劇薬の管理確認（新規）</span></td>
+<td class="td-before"><span class="none-text">（①〜⑥のみ、該当項目なし）</span></td>
+<td class="arrow-col">→</td>
+<td class="td-after"><span class="change-tag tag-new">新規追加</span><br>⑦ 毒薬及び劇薬について医薬品医療機器等法に基づく適切な保管、管理が行われているか確認する。</td>
+<td class="td-point">毒薬・劇薬の保管・管理確認が新たな確認事項として追加された。</td>
+</tr>
+
+<tr data-tag="mod">
+<td class="td-no">5</td>
+<td class="td-loc">Ⅰ-ⅰ-イ<span class="sub">医療事故調査制度（追記）</span></td>
+<td class="td-before">【参考】5件（令和3〜4年通知等）を記載。遺族等からの申出があった場合の対応確認を求める記述あり。</td>
+<td class="arrow-col">→</td>
+<td class="td-after"><span class="change-tag tag-mod">内容拡充</span><br>①「病院等における医療の安全を確保するための措置について」（令和８年３月31日 医政地発0331第72号）を参考通知に追加。<br>②管理者等への<strong>研修受講義務（令和11年4月1日施行）</strong>の周知が追加。<br>③医療事故判断プロセスの具体例（別添1）参照を明記。</td>
+<td class="td-point">令和８年改正省令に基づく研修義務（令和11年4月施行）の周知と、医療事故判断プロセスの具体例参照が追加された。</td>
+</tr>
+
+<tr data-tag="ren">
+<td class="td-no">6</td>
+<td class="td-loc">Ⅰ-ⅰ-ウ<span class="sub">項目名の変更</span></td>
+<td class="td-before">「ウ．医療事故防止対策について」</td>
+<td class="arrow-col">→</td>
+<td class="td-after"><span class="change-tag tag-ren">名称変更</span><br>「ウ．医療安全対策について」</td>
+<td class="td-point">「医療事故防止対策」から「医療安全対策」へ改称。より広い概念に変更された。</td>
+</tr>
+
+<tr data-tag="new">
+<td class="td-no">7</td>
+<td class="td-loc">Ⅱ-ⅰ-カ<span class="sub">医療機関基本情報のEMIS入力（新規）</span></td>
+<td class="td-before"><span class="none-text">（該当項目なし）</span></td>
+<td class="arrow-col">→</td>
+<td class="td-after"><span class="change-tag tag-new">新規追加</span><br>カ．医療機関基本情報の入力について<br>広域災害・救急医療情報システム（EMIS）への医療機関基本情報の入力確認および指導を行う。<br>【参考】「汎用調査入力のお願いについて」（令和7年12月26日付け医政地発1226第２号）</td>
+<td class="td-point">EMIS（広域災害・救急医療情報システム）への基本情報入力に関する確認・指導項目が新設された。</td>
+</tr>
+
+<tr data-tag="new">
+<td class="td-no">8</td>
+<td class="td-loc">Ⅱ-ⅲ-ケ<span class="sub">サイバーセキュリティの確保（新規）</span></td>
+<td class="td-before"><span class="none-text">（該当項目なし）</span></td>
+<td class="arrow-col">→</td>
+<td class="td-after"><span class="change-tag tag-new">新規追加</span><br>ケ．サイバーセキュリティの確保について<br>医療法施行規則第14条第２項に基づき、最新の「医療情報システムの安全管理に関するガイドライン」及びサイバーセキュリティ対策チェックリストを活用した確認・指導を実施。</td>
+<td class="td-point">サイバーセキュリティ確保の確認・指導項目が新設された。令和５年省令に基づく法的根拠が明示された。</td>
+</tr>
+
+<tr data-tag="ref">
+<td class="td-no">9</td>
+<td class="td-loc">Ⅲ-ア<span class="sub">インフォームド・コンセント（参考通知更新）</span></td>
+<td class="td-before">「美容医療サービス等の自由診療におけるインフォームド・コンセントの取り扱いについて」（平成25年9月27日付け医政発0927第1号）</td>
+<td class="arrow-col">→</td>
+<td class="td-after"><span class="change-tag tag-ref">参考通知更新</span><br>「美容医療サービス等の自由診療におけるインフォームド・コンセントの取扱い等について」（令和６年３月22日付け医政発0322第９号）</td>
+<td class="td-point">参照通知が平成25年版から令和６年版に更新（最新通知への差し替え）。</td>
+</tr>
+
+<tr data-tag="mod">
+<td class="td-no">10</td>
+<td class="td-loc">Ⅲ-イ<span class="sub">オンライン診療（大幅改訂）</span></td>
+<td class="td-before">「オンライン診療の適切な実施に関する指針」（平成30年3月）に基づき指導。</td>
+<td class="arrow-col">→</td>
+<td class="td-after"><span class="change-tag tag-mod">内容大幅改訂</span><br>①オンライン診療受診施設も報告徴収・立入検査・是正命令の対象に追加。<br>②「オンライン診療の適切な実施に関する指針」（令和８年4月改訂版）に更新。<br>③チェックリスト活用を明記。<br>【参考】令和８年3月27日付け医政発0327第5号を追加。</td>
+<td class="td-point">オンライン診療受診施設への立入検査対象拡大、令和８年4月改訂指針への更新、チェックリスト活用の明記など規制が大幅強化。</td>
+</tr>
+
+<tr data-tag="mod">
+<td class="td-no">11</td>
+<td class="td-loc">Ⅲ-オ<span class="sub">無資格者による医療行為等の防止（追記）</span></td>
+<td class="td-before">「コンタクト診療所」の指摘、複数医療機関の管理・長期不在等への対応のみ記載。</td>
+<td class="arrow-col">→</td>
+<td class="td-after"><span class="change-tag tag-mod">内容追加</span><br>①保助看法違反が疑われる場合、医療法第25条第2項に基づく立入検査が可能と明記。<br>②無資格者によるエックス線照射への対応を追加。<br>③医療機器事業者の立会い確認書の確認を追加。<br>【参考】令和7年11月11日付・令和7年8月15日付（医政発0815第21号）通知を追加。</td>
+<td class="td-point">保助看法違反対応権限の明確化、X線照射・美容医療に関する新通知参照が追加され、無資格者対策が強化された。</td>
+</tr>
+
+<tr data-tag="relax">
+<td class="td-no">12</td>
+<td class="td-loc">Ⅲ-カ<span class="sub">医療従事者の適正な配置（緩和）</span></td>
+<td class="td-before">「当該人員配置標準を満たしていない場合は、地方厚生（支）局にも情報提供すること。」</td>
+<td class="arrow-col">→</td>
+<td class="td-after"><span class="change-tag tag-relax">表現緩和</span><br>「当該人員配置標準を満たしていない場合は、<strong>必要に応じて</strong>、地方厚生（支）局にも情報提供すること。」</td>
+<td class="td-point">地方厚生（支）局への情報提供が「必須」から「必要に応じて」に緩和された。</td>
+</tr>
+
+<tr data-tag="new">
+<td class="td-no">13</td>
+<td class="td-loc">Ⅲ-コ<span class="sub">外来医師過多区域の取扱い（新規）</span></td>
+<td class="td-before"><span class="none-text">（該当項目なし）</span></td>
+<td class="arrow-col">→</td>
+<td class="td-after"><span class="change-tag tag-new">新規追加</span><br>コ．外来医師過多区域の取扱いについて<br>外来医師過多区域に係る要請等の対象となった新規に開設された無床診療所については、立入検査の際に、地域外来医療の提供状況を確認の上、地域外来医療を担うことについて働きかける。<br>【参考】令和8年3月19日付け医政発0319第20号等。</td>
+<td class="td-point">令和8年改正（外来医師過多区域規制の新設）に対応した新規確認・指導項目が追加された。</td>
+</tr>
+
+<tr data-tag="ref">
+<td class="td-no">14</td>
+<td class="td-loc">Ⅳ-ⅱ-ア<span class="sub">広告規制（ガイドライン更新）</span></td>
+<td class="td-before">医療広告ガイドライン（令和６年9月13日改正）<br>「事例解説書（第5版）」（令和7年3月11日）</td>
+<td class="arrow-col">→</td>
+<td class="td-after"><span class="change-tag tag-ref">参考通知更新</span><br>医療広告<strong>等</strong>ガイドライン（令和８年3月30日改正）<br>「事例解説書（第6版）」（令和8年3月30日）</td>
+<td class="td-point">医療広告ガイドラインが令和8年3月改正版・第6版に更新。名称に「等」が付記された。</td>
+</tr>
+
+<tr data-tag="ref">
+<td class="td-no">15</td>
+<td class="td-loc">Ⅰ-ⅲ-イ<span class="sub">診療用放射線の防護（参考通知追加）</span></td>
+<td class="td-before">令和5年3月23日付・令和7年3月31日付の取扱い改正通知等。「放射性医薬品を投与された患者の退出等」（令和3年8月19日付け医政地発0819第1号）。</td>
+<td class="arrow-col">→</td>
+<td class="td-after"><span class="change-tag tag-ref">参考通知追加</span><br>以下を追加：<br>・令和7年7月22日付け医政発0722第2号<br>・令和8年3月24日付け医政発0324第3号<br>・「放射性医薬品を投与された患者の退出等」（令和7年9月26日付け医政地発0926第1号）<br>・「PET検査薬等の取扱いの一部改正」（令和8年3月31日付け医政地発0331第2号）</td>
+<td class="td-point">診療用放射線取扱いに関する最新改正通知（令和7・8年）及びPET検査薬取扱いに関する通知が追加された。</td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== TAB 2 : 立入検査要綱 ===== -->
+<div class="tab-panel" id="panel-1">
+  <div class="summary-bar">
+    <span class="badge badge-new"><span class="badge-dot"></span>新規追加</span>
+    <span class="badge badge-mod"><span class="badge-dot"></span>内容変更・拡充</span>
+    <span class="badge badge-ren"><span class="badge-dot"></span>名称変更</span>
+    <span class="summary-total">全13項目</span>
+  </div>
+  <div class="filter-bar">
+    <span class="filter-label">絞り込み：</span>
+    <button class="filter-btn on" onclick="filterTable(1,'all',this)">すべて</button>
+    <button class="filter-btn" onclick="filterTable(1,'new',this)">新規追加</button>
+    <button class="filter-btn" onclick="filterTable(1,'mod',this)">内容変更</button>
+    <button class="filter-btn" onclick="filterTable(1,'ren',this)">名称変更</button>
+  </div>
+  <table>
+    <colgroup><col><col><col><col><col><col></colgroup>
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>該当箇所・項目</th>
+        <th>改定前（令和７年度）</th>
+        <th></th>
+        <th>改定後（令和８年度）</th>
+        <th>変更のポイント</th>
+      </tr>
+    </thead>
+    <tbody>
+
+<tr data-tag="ref">
+<td class="td-no">1</td>
+<td class="td-loc">通知番号・日付</td>
+<td class="td-before">医政発0627第７号<br>令和７年６月27日</td>
+<td class="arrow-col">→</td>
+<td class="td-after"><span class="change-tag tag-ref">更新</span><br>医政発0612第９号<br>令和８年６月12日</td>
+<td class="td-point">通知番号・発出日付が更新された。</td>
+</tr>
+
+<tr data-tag="ref">
+<td class="td-no">2</td>
+<td class="td-loc">別添・検査要綱<span class="sub">施行時期</span></td>
+<td class="td-before">（令和７年６月）</td>
+<td class="arrow-col">→</td>
+<td class="td-after"><span class="change-tag tag-ref">更新</span><br>（令和８年６月）</td>
+<td class="td-point">施行時期が令和８年６月に更新された。</td>
+</tr>
+
+<tr data-tag="new">
+<td class="td-no">3</td>
+<td class="td-loc">第１表（施設表）<span class="sub">設備の種類の定義（36番新設）</span></td>
+<td class="td-before">「35．滅菌装置（オートクレーブ等）」が最終定義項目。<br>「診療用粒子線照射装置」定義中：医薬品医療機器等法第２条<strong>第17項</strong></td>
+<td class="arrow-col">→</td>
+<td class="td-after"><span class="change-tag tag-new">新規追加</span><br>「36．診療用放射性同位元素使用器具」を新設：密封されていない放射性同位元素を装備している診療の用に供する機器。<br>※条項番号も第17項→<strong>第18項</strong>に修正。</td>
+<td class="td-point">「診療用放射性同位元素使用器具」が設備定義に追加（第36番）。医薬品医療機器等法の条項番号も改正に伴い修正された。</td>
+</tr>
+
+<tr data-tag="new">
+<td class="td-no">4</td>
+<td class="td-loc">第１表（施設表）<span class="sub">設備の有無欄への追加</span></td>
+<td class="td-before">末尾：<br>サイクロトロン<strong>装置</strong><br>滅菌装置（オートクレーブ等）</td>
+<td class="arrow-col">→</td>
+<td class="td-after"><span class="change-tag tag-new">新規追加</span><span class="change-tag tag-ren" style="margin-left:4px">名称変更</span><br>①「サイクロトロン装置」→「サイクロトロン」に変更<br>②「診療用放射性同位元素使用器具」の有無確認欄を新設</td>
+<td class="td-point">名称変更と新設の２点。当該機器を保有する病院が立入検査の確認対象となる。</td>
+</tr>
+
+<tr data-tag="ren">
+<td class="td-no">5</td>
+<td class="td-loc">第２表（検査表）<span class="sub">項目「１―６」の名称変更</span></td>
+<td class="td-before">１―６ （管理）栄養士数</td>
+<td class="arrow-col">→</td>
+<td class="td-after"><span class="change-tag tag-ren">名称変更</span><br>１―６ 栄養士又は管理栄養士数</td>
+<td class="td-point">括弧書きの略記から「栄養士又は管理栄養士」を並列で明示する表記に変更された。</td>
+</tr>
+
+<tr data-tag="new">
+<td class="td-no">6</td>
+<td class="td-loc">第２表（検査表）<span class="sub">検査結果欄への「百分率」追加</span></td>
+<td class="td-before">検査結果欄：<br>Ａ 総項目数<br>Ｂ 対象項目数<br>Ｃ 適「○」数<br>Ｄ 否「×」数<br><span class="none-text">（百分率欄なし）</span></td>
+<td class="arrow-col">→</td>
+<td class="td-after"><span class="change-tag tag-new">新規追加</span><br>Ａ 総項目数<br>Ｂ 対象項目数<br>Ｃ 適「○」数<br>Ｄ 否「×」数<br><strong>百分率 Ｃ／Ｂ×100</strong>　←追加</td>
+<td class="td-point">適合率（百分率）の集計欄が新設。各施設の適合率を数値で把握・比較できるようになり、客観的評価が強化される。</td>
+</tr>
+
+<tr data-tag="new">
+<td class="td-no">7</td>
+<td class="td-loc">検査基準<span class="sub">２－22「オンライン診療の適切な実施」（新規）</span></td>
+<td class="td-before"><span class="none-text">（２－21「医療法人における経営情報の報告」が最終項目）</span></td>
+<td class="arrow-col">→</td>
+<td class="td-after"><span class="change-tag tag-new">新規追加</span><br>２－22 オンライン診療の適切な実施<br>根拠法令：法14の3、法14の4、則9の6の2〜9の6の20等<br>確認事項：<br>1. オンライン診療を行う医療機関の届出<br>2. オンライン診療基準等の遵守<br>3. 医療機関の管理者の措置<br>※チェックリスト（別添３）を活用して確認。</td>
+<td class="td-point">令和８年改正（オンライン診療の法制化）に対応。届出・遵守・管理者措置を立入検査で確認することが義務づけられた。</td>
+</tr>
+
+<tr data-tag="mod">
+<td class="td-no">8</td>
+<td class="td-loc">検査基準<span class="sub">６―11「照射器具及び放射性同位元素の管理」（項目名・内容変更）</span></td>
+<td class="td-before">６―11 照射器具<strong>及び放射性同位元素</strong>の管理<br>1. 照射器具の紛失防止<br>2. 診療用放射性同位元素又は陽電子断層撮影診療用放射性同位元素の使用廃止後の措置</td>
+<td class="arrow-col">→</td>
+<td class="td-after"><span class="change-tag tag-mod">内容拡充</span><br>６―11 照射器具、<strong>診療用放射性同位元素使用器具</strong>及び放射性同位元素の管理<br>1. 照射器具の紛失防止<br>2. <strong>診療用放射性同位元素使用器具、</strong>診療用放射性同位元素又は陽電子断層撮影診療用放射性同位元素の使用廃止後の措置</td>
+<td class="td-point">「診療用放射性同位元素使用器具」が管理対象に追加され、項目名と確認事項（廃止後の措置対象）が拡充された。</td>
+</tr>
+
+<tr data-tag="mod">
+<td class="td-no">9</td>
+<td class="td-loc">検査基準<span class="sub">被ばく線量管理・記録対象機器リスト</span></td>
+<td class="td-before">管理・記録対象の機器リスト（摘要欄）：移動型デジタル式、移動型アナログ式、据置型各種、ＣＴ系装置、陽電子断層撮影診療用放射性同位元素、診療用放射性同位元素</td>
+<td class="arrow-col">→</td>
+<td class="td-after"><span class="change-tag tag-mod">内容追加</span><br>上記リストに「<strong>診療用放射性同位元素使用器具</strong>」を追加</td>
+<td class="td-point">「診療用放射性同位元素使用器具」が被ばく線量の管理・記録対象に追加。当該機器を使用した診療でも線量管理が義務付けられる。</td>
+</tr>
+
+<tr data-tag="mod">
+<td class="td-no">10</td>
+<td class="td-loc">構造設備基準<span class="sub">放射線測定対象区域</span></td>
+<td class="td-before">放射線測定・汚染測定・標識掲示の対象区域に「診療用放射性同位元素使用室」等を記載。<br><span class="none-text">「診療用放射性同位元素使用器具使用室」の記載なし。</span></td>
+<td class="arrow-col">→</td>
+<td class="td-after"><span class="change-tag tag-mod">内容追加</span><br>「<strong>診療用放射性同位元素使用器具使用室</strong>」が放射線測定対象区域・汚染測定対象区域・標識掲示対象施設等に追加された。</td>
+<td class="td-point">新設の「診療用放射性同位元素使用器具」に伴い、その使用室が構造設備基準の各所（使用室・測定・汚染・標識等）に追加された。</td>
+</tr>
+
+<tr data-tag="mod">
+<td class="td-no">11</td>
+<td class="td-loc">構造設備基準<span class="sub">貯蔵容器の基準（摘要）</span></td>
+<td class="td-before">貯蔵容器の標識表示対象：「診療用放射線照射装置若しくは診療用放射線照射器具に装備する放射性同位元素…」</td>
+<td class="arrow-col">→</td>
+<td class="td-after"><span class="change-tag tag-mod">内容追加</span><br>「診療用放射線照射装置、診療用放射線照射器具<strong>若しくは診療用放射性同位元素使用器具</strong>に装備する放射性同位元素…」</td>
+<td class="td-point">貯蔵容器の標識表示対象に「診療用放射性同位元素使用器具」が追加された。気密容器基準にも同器具が追記。</td>
+</tr>
+
+<tr data-tag="mod">
+<td class="td-no">12</td>
+<td class="td-loc">構造設備基準<span class="sub">排水設備・排気設備の対象</span></td>
+<td class="td-before">排水・排気設備の適用対象：「診療用放射性同位元素又は陽電子断層撮影診療用放射性同位元素を使用する病院」</td>
+<td class="arrow-col">→</td>
+<td class="td-after"><span class="change-tag tag-mod">内容追加</span><br>「<strong>診療用放射性同位元素使用器具、</strong>診療用放射性同位元素又は陽電子断層撮影診療用放射性同位元素を使用する病院」</td>
+<td class="td-point">排水・排気設備基準の適用対象施設に「診療用放射性同位元素使用器具」使用病院が追加された。</td>
+</tr>
+
+<tr data-tag="ref">
+<td class="td-no">13</td>
+<td class="td-loc">検査基準<span class="sub">２－19 サイバーセキュリティの確保（実質変更なし）</span></td>
+<td class="td-before">2-19 サイバーセキュリティの確保（則14.2）<br>「令和７年度版サイバーセキュリティ対策チェックリスト」（令7.5.14 医政参発0514第1号）を参照。</td>
+<td class="arrow-col">→</td>
+<td class="td-after"><span class="change-tag tag-ref">変更なし</span><br>同上（引用通知の表記も同一のまま）</td>
+<td class="td-point">令和７・８年度ともに同一内容（令和７年度版チェックリスト）が参照されており、今年度改正による実質的な変更は確認されない。</td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+</div>
+
+<script>
+function switchTab(idx) {
+  document.querySelectorAll('.tab-btn').forEach((b,i)   => b.classList.toggle('active', i===idx));
+  document.querySelectorAll('.tab-panel').forEach((p,i) => p.classList.toggle('active', i===idx));
+}
+
+function filterTable(tabIdx, tag, btn) {
+  var panel = document.getElementById('panel-' + tabIdx);
+  panel.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('on'); });
+  btn.classList.add('on');
+  panel.querySelectorAll('tbody tr').forEach(function(tr){
+    tr.style.display = (tag === 'all' || tr.dataset.tag === tag) ? '' : 'none';
+  });
+}
+</script>
+</body>
+</html>
